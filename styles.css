@@ -1,0 +1,374 @@
+/* Design tokens (from Figma variables) */
+:root {
+  --color-bg-inverse: #1a082b;
+  --color-bg-brand-light: #aa91fc;
+  --color-bg-accent: #defb8e;
+  --color-bg-badge: #e9e3fd;
+  --color-square: #2a1456;
+  --color-stripe: rgba(143, 111, 245, 0.38);
+  --color-text-inverse: #ffffff;
+  --color-text-brand: #5a37b8;
+  --color-text-primary: #171717;
+  --color-border-strong: #a3a3a3;
+
+  --font-family-body: "Host Grotesk", system-ui, sans-serif;
+  --font-family-heading: "Host Grotesk", system-ui, sans-serif;
+  --font-size-md: 16px;
+  --font-size-lg: 18px;
+  --font-size-7xl: 80px;
+
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--color-bg-inverse);
+  color: var(--color-text-inverse);
+  font-family: var(--font-family-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+p,
+h1 {
+  margin: 0;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- Hero frame (1440 × 1024 in Figma) — always fits the screen ---------- */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--color-bg-inverse);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header: logo at x50 / y38, 1px brand line at y107 */
+.hero__header {
+  height: 108px;
+  padding: 38px 50px 0;
+  border-bottom: 1px solid var(--color-bg-brand-light);
+  flex-shrink: 0;
+}
+
+.hero__logo {
+  display: inline-block;
+}
+
+.hero__logo img {
+  display: block;
+  width: 251px;
+  height: auto;
+}
+
+/* Middle area between header and footer; content is centred in it,
+   leaving room at the bottom for the panels (lands at y251 on a 1024px screen) */
+.hero__body {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px 162px;
+}
+
+/* Decorative squares, positioned relative to the content block */
+.hero__square {
+  position: absolute;
+  width: 65px;
+  height: 64px;
+  background: var(--color-square);
+  z-index: -1;
+}
+
+.hero__square--tl { left: calc(50% - 526px); top: -27px; }
+.hero__square--tr { left: calc(50% + 443px); top: -27px; }
+.hero__square--bl { left: calc(50% - 526px); top: 306px; }
+.hero__square--br { left: calc(50% + 443px); top: 306px; }
+
+/* ---------- Content block ---------- */
+.hero__content {
+  position: relative;
+  width: min(783px, 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  text-align: center;
+}
+
+.hero__text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 17px;
+  width: 100%;
+}
+
+/* Badge pill with diagonal stripes */
+.hero__badge {
+  position: relative;
+  overflow: hidden;
+  height: 48px;
+  padding: 11px 16px 0;
+  border-radius: 44px;
+  background: var(--color-bg-badge);
+  color: var(--color-text-brand);
+  font-size: var(--font-size-md);
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.hero__badge-label {
+  position: relative;
+}
+
+.hero__badge-stripe {
+  position: absolute;
+  top: -68px;
+  width: 181px;
+  height: 49.76px;
+  /* centre of the 168.53 × 157.21 rotated bounding box */
+  margin-top: 53.72px;
+  transform: rotate(-41.5deg);
+}
+
+.hero__badge-stripe--1 { left: calc(-50px - 6.24px); background: rgba(143, 111, 245, 0.03); }
+.hero__badge-stripe--2 { left: calc(74px - 6.24px);  background: rgba(143, 111, 245, 0.08); }
+.hero__badge-stripe--3 { left: calc(238px - 6.24px); background: rgba(143, 111, 245, 0.08); }
+
+.hero__title {
+  padding: 12.5px 0; /* text box is 185px tall in Figma */
+  font-family: var(--font-family-heading);
+  font-weight: 600;
+  font-size: var(--font-size-7xl);
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.hero__subtitle {
+  max-width: 617px;
+  min-height: 58px;
+  font-size: var(--font-size-lg);
+  line-height: 1.55;
+}
+
+/* ---------- Email form ---------- */
+.hero__form {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: min(460px, 100%);
+  padding: 8px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-xl);
+}
+
+.hero__form input {
+  flex: 1;
+  min-width: 0;
+  padding: 8px;
+  border: 0;
+  background: transparent;
+  color: var(--color-text-inverse);
+  font: inherit;
+  font-size: var(--font-size-lg);
+  line-height: 1.55;
+  outline: none;
+}
+
+.hero__form input::placeholder {
+  color: var(--color-text-inverse);
+  opacity: 1;
+}
+
+.hero__form:focus-within {
+  border-color: var(--color-bg-brand-light);
+}
+
+.hero__form button {
+  flex-shrink: 0;
+  padding: 8px 16px;
+  border: 0;
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-accent);
+  color: var(--color-text-primary);
+  font: inherit;
+  font-size: var(--font-size-lg);
+  line-height: 1.55;
+  cursor: pointer;
+}
+
+.hero__form button:focus-visible {
+  outline: 2px solid var(--color-bg-brand-light);
+  outline-offset: 2px;
+}
+
+.hero__form-status {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 12px;
+  font-size: var(--font-size-md);
+  color: var(--color-bg-brand-light);
+}
+
+/* ---------- Bottom glow + footer ---------- */
+/* "sdf 1": glass panels on a wheel that turns counterclockwise as one piece.
+   The wheel has 8 positions (keyframes below) — the visible ones are the exact
+   panel positions/angles from the design. Every panel travels through them in
+   step, so the whole set moves together and loops seamlessly. */
+.hero__sdf {
+  --step: 4s; /* time for the wheel to move one panel along; lower = faster */
+
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 1440px;
+  /* Panels are confined to this bottom strip; the top 50px fades out so a
+     panel never rises over the content. */
+  height: 244px; /* panel tops (50px down) sit at y830 in the 1024px design */
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 40px);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 40px);
+  transform: translateX(-50%);
+  perspective: 1000px;
+  perspective-origin: 50% 1064px;
+  mix-blend-mode: plus-lighter;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.hero__sdf span {
+  position: absolute;
+  left: 50%;
+  top: 50px;
+  width: 760px;
+  height: 900px;
+  transform-origin: 0 0;
+  border-left: 3px solid rgba(240, 234, 255, 0.95);
+  border-top: 1.5px solid rgba(190, 180, 255, 0.45);
+  border-top-left-radius: 22px;
+  background:
+    linear-gradient(to right, rgba(10, 6, 40, 0.55), rgba(10, 6, 40, 0) 45%),
+    linear-gradient(
+      to bottom,
+      rgba(50, 60, 190, 0.4) 0%,
+      rgba(70, 100, 255, 0.95) 16%,
+      rgba(120, 110, 255, 0.6) 34%,
+      rgba(255, 176, 112, 0.5) 58%,
+      rgba(40, 60, 220, 0) 100%
+    );
+  backface-visibility: visible;
+  animation: sdf-wheel calc(var(--step) * 8) linear infinite;
+  animation-delay: calc(var(--step) * var(--n) * -1);
+}
+
+/* Hinge x (from page centre) and angle of each wheel position, right → left.
+   12.5%–87.5% are the seven panels in the design; 0% / 100% are off-screen. */
+@keyframes sdf-wheel {
+  0%    { transform: translateX(1700px)  rotateY(170deg); }
+  12.5% { transform: translateX(840px)   rotateY(144deg); }
+  25%   { transform: translateX(513px)   rotateY(124.5deg); }
+  37.5% { transform: translateX(170px)   rotateY(109.5deg); }
+  50%   { transform: translateX(-44px)   rotateY(90deg); }
+  62.5% { transform: translateX(-235px)  rotateY(70.5deg); }
+  75%   { transform: translateX(-492px)  rotateY(54deg); }
+  87.5% { transform: translateX(-840px)  rotateY(36deg); }
+  100%  { transform: translateX(-1700px) rotateY(10deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__sdf span { animation-play-state: paused; }
+}
+
+.hero__footer {
+  height: 49px;
+  padding: 9px 31px 0 0; /* text centre sits at x704.5 in the design */
+  background-color: var(--color-bg-brand-light);
+  background-image: linear-gradient(90deg, var(--color-stripe) 0 181px, transparent 181px);
+  background-size: 355px 65px;
+  background-repeat: repeat-x;
+  background-position: calc(50% + 166.5px) 0;
+  font-size: var(--font-size-lg);
+  line-height: 1.55;
+  text-align: center;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1100px) {
+  .hero__square { display: none; }
+}
+
+/* Shorter laptop screens: tighten so everything stays in view */
+@media (max-height: 820px) and (min-width: 769px) {
+  .hero__body { padding-bottom: 130px; }
+  .hero__content { gap: 24px; }
+  .hero__title { max-width: 640px; padding: 0; font-size: 64px; }
+  .hero__square--bl,
+  .hero__square--br { top: 250px; }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    min-height: 100vh;
+    min-height: 100svh;
+  }
+
+  .hero__header {
+    height: 72px;
+    padding: 22px 16px 0;
+  }
+
+  .hero__logo img { width: 168px; }
+
+  .hero__body { padding: 40px 16px 150px; }
+
+  .hero__content { gap: 28px; }
+
+  .hero__badge {
+    height: 40px;
+    padding: 9px 14px 0;
+    font-size: 13px;
+  }
+
+  .hero__title {
+    padding: 0;
+    font-size: 44px;
+  }
+
+  .hero__subtitle { font-size: 16px; }
+
+  .hero__form input,
+  .hero__form button { font-size: 16px; }
+
+  .hero__sdf {
+    transform: translateX(-50%) scale(0.62);
+    transform-origin: 50% 100%;
+  }
+
+  .hero__footer {
+    height: auto;
+    padding: 12px 16px;
+    font-size: 14px;
+  }
+}
